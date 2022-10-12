@@ -1,0 +1,23 @@
+<?php 
+
+/**
+ * @var \Magento\Weee\Block\Adminhtml\Items\Price\Renderer $block 
+ */
+
+/***
+ *  This code is added for row total calculation where row total is coming with tax and 
+ *  now row total is coming without the tax.
+ */
+
+    $_item = $block->getItem();
+    $helper = $this->helper('Chetu\VatTax\Helper\Data');
+    $creditmemoId = $this->getRequest()->getParam('creditmemo_id');
+    $orderId = $this->getRequest()->getParam('order_id');
+    $invoiceId = $this->getRequest()->getParam('invoice_id');
+    $storeId=$block->getStoreId();
+    
+if($helper->vatCheckedStore($storeId) || $helper->checkCreditStore($creditmemoId) || $helper->checkStore($orderId) || $helper->checkInvoiceStore($invoiceId)) : ?>
+<?php echo $block->getRowPriceExclTaxHtml() ?>
+<?php else :  ?>
+<?php echo /* @noEscape */ $block->displayPrices($block->getBaseTotalAmount($_item), $block->getTotalAmount($_item)) ?>
+<?php endif; ?>

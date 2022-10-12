@@ -1,0 +1,97 @@
+<?php
+/* @var \Magento\Sales\Block\Adminhtml\Order\Totals $block */
+?>
+<table class="data-table admin__table-secondary order-subtotal-table">
+    <?php $_totals = $block->getTotals('footer') ?>
+    <?php if ($_totals) : ?>
+    <tfoot>
+        <?php foreach ($block->getTotals('footer') as $_code => $_total) : ?>
+        <?php if ($_total->getBlockName()) : ?>
+        <?php echo $block->getChildHtml($_total->getBlockName(), false) ?>
+        <?php else : ?>
+        <tr class="col-<?php echo $block->escapeHtmlAttr($_code) ?>">
+            <td <?php echo /* @noEscape */ $block->getLabelProperties() ?> class="label">
+                <strong><?php echo $block->escapeHtml($_total->getLabel()) ?></strong>
+            </td>
+            <td <?php echo /* @noEscape */ $block->getValueProperties() ?>>
+                <strong><?php echo /* @noEscape */ $block->formatValue($_total) ?></strong>
+            </td>
+        </tr>
+        <?php endif; ?>
+        <?php endforeach; ?>
+    </tfoot>
+    <?php endif; ?>
+    <?php $_totals = $block->getTotals('') ?>
+    <?php if ($_totals) : ?>
+    <tbody>
+        <?php foreach ($_totals as $_code => $_total) : ?>
+        <?php if ($_total->getBlockName()) : ?>
+        <?php echo $block->getChildHtml($_total->getBlockName(), false) ?>
+        <?php else : ?>
+        <?php /***Custom VAT code start***/?>
+        <?php 
+            /**
+              *This condition add display grand total for VAT stores.
+            */
+           ?>
+        <?php $helper = $this->helper('Chetu\VatTax\Helper\Data');
+                    if($helper->checkStore($block->getOrder()->getId())) : ?>
+        <tr class="col-<?php echo $block->escapeHtmlAttr($_code) ?>">
+            <?php if ($_total->getCode() != 'grand_total_incl' && $_total->getCode() != 'grand_total') : ?>
+            <td <?php echo /* @noEscape */ $block->getLabelProperties() ?> class="label">
+                <?php if ($_total->getStrong()) : ?>
+                <strong><?php echo $block->escapeHtml($_total->getLabel()) ?></strong>
+                <?php else : ?>
+                <?php echo $block->escapeHtml($_total->getLabel()) ?>
+                <?php endif; ?>
+            </td>
+            <?php elseif ($_total->getCode() != 'grand_total') : ?>
+            <td <?php echo /* @noEscape */ $block->getLabelProperties() ?> class="label">
+                <?php if ($_total->getStrong()) : ?>
+                <strong><?php echo __("Grand Total") ?></strong>
+                <?php else : ?>
+                <?php echo $block->escapeHtml($_total->getLabel()) ?>
+                <?php endif; ?>
+            </td>
+            <?php else : ?>
+            <?php endif; ?>
+            <?php if ($_total->getCode() != 'grand_total') : ?>
+            <?php if ($_total->getStrong()) : ?>
+            <td <?php echo /* @noEscape */ $block->getValueProperties() ?>>
+                <strong><?php echo /* @noEscape */ $block->formatValue($_total) ?></strong>
+            </td>
+            <?php else : ?>
+            <td <?php echo /* @noEscape */ $block->getValueProperties() ?>>
+                <span><?php echo /* @noEscape */ $block->formatValue($_total) ?></span>
+            </td>
+            <?php endif; ?>
+            <?php else : ?>
+            <?php endif; ?>
+        </tr>
+        <?php else : ?>
+        <!-- #endregion -->
+        <tr class="col-<?php echo $block->escapeHtmlAttr($_code) ?>">
+            <td <?php echo /* @noEscape */ $block->getLabelProperties() ?> class="label">
+                <?php if ($_total->getStrong()) : ?>
+                <strong><?php echo $block->escapeHtml($_total->getLabel()) ?></strong>
+                <?php else : ?>
+                <?php echo $block->escapeHtml($_total->getLabel()) ?>
+                <?php endif?>
+            </td>
+            <?php if ($_total->getStrong()) : ?>
+            <td <?php echo /* @noEscape */ $block->getValueProperties() ?>>
+                <strong><?php echo /* @noEscape */ $block->formatValue($_total) ?></strong>
+            </td>
+            <?php else : ?>
+            <td <?php echo /* @noEscape */ $block->getValueProperties() ?>>
+                <span><?php echo /* @noEscape */ $block->formatValue($_total) ?></span>
+            </td>
+            <?php endif; ?>
+        </tr>
+        <?php endif; ?>
+        <?php /***Custom VAT code end***/?>
+        <?php endif; ?>
+        <?php endforeach; ?>
+    </tbody>
+    <?php endif; ?>
+</table>

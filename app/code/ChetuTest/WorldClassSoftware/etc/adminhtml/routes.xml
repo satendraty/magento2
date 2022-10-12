@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="chetutest_worldclasssoftware_things" frontName="chetutest_worldclasssoftware_things">
+            <module name="ChetuTest_WorldClassSoftware"/>
+        </route>
+    </router>
+</config>

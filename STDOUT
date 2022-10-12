@@ -1,0 +1,41 @@
+%!PS
+<< /PageSize [612 792] >> setpagedevice
+/Helvetica              % name the desired font
+11 selectfont           % choose the size in points and establish 
+                        % the font as the current one
+
+503 722 moveto
+(11/25/17) show
+501 684 moveto
+(4000.00) show
+84 686 moveto
+(Alan Storm) show
+36 662 moveto
+(Four Thousand and 00/100) show
+72 639 moveto
+(Alan Storm) show
+72 626 moveto
+(123 Main Street) show
+72 614 moveto
+(Anytown, OR 97202) show
+60 506 moveto
+(Alan Storm) show
+433 506 moveto
+(11/25/17) show
+524 494 moveto
+(4000.00) show
+36 302 moveto
+(Bank_Name) show
+524 302 moveto
+(4000.00) show
+60 254 moveto
+(Alan Storm) show
+433 254 moveto
+(11/25/17) show
+524 242 moveto
+(4000.00) show
+36 50 moveto
+(Bank_Name) show
+524 50 moveto
+(4000.00) show
+showpage                % print all on the page

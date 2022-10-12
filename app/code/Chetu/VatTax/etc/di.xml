@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="ClassyLlama\AvaTax\Framework\Interaction\TaxCalculation" type="Chetu\VatTax\Model\TaxCalculation" />
+    <preference for="ClassyLlama\AvaTax\Framework\Interaction\Line" type="Chetu\VatTax\Model\Line" />
+    <preference for="Magento\Sales\Block\Adminhtml\Order\Totals" type="Chetu\VatTax\Block\Adminhtml\Order\TotalsData" />
+    <preference for="Magento\Sales\Block\Adminhtml\Order\AbstractOrder" type="Chetu\VatTax\Block\Adminhtml\Order\AbstractOrder" />
+    <preference for="Magento\Sales\Controller\Adminhtml\Order\Invoice\Save" type="Chetu\VatTax\Model\Adminhtml\Order\Invoice\Save" />     
+    <preference for="Magento\Sales\Controller\Adminhtml\Order\Creditmemo\Save" type="Chetu\VatTax\Model\Adminhtml\Order\Creditmemo\Save" />
+</config>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="chetu" translate="label" sortOrder="45">
+            <label>Sales</label>
+        </tab>
+        <section id="vattax" translate="label" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Vat Tax</label>
+            <tab>sales</tab>
+            <resource>Chetu_VatTax::Vattax_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="tax_type" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="store_select" translate="label" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Store Name</label>
+                    <source_model>Chetu\VatTax\Model\Config\Source\ConfigOption</source_model>
+                    <can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="vattax/general/tax_type">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

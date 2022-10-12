@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+  * @var \Magento\Weee\Block\Item\Price\Renderer $block 
+ */
+
+/**
+  * File override for update price based on VAT Store. 
+ */
+
+$_item = $block->getItem();?>
+
+<?php 
+ $_order =$block->getItem()->getOrderItem()->getOrder();
+ $helper = $this->helper('Chetu\VatTax\Helper\Data');
+ $orderId = $this->getRequest()->getParam('order_id');
+if ($helper->checkStore($orderId)) :?>
+<?php echo /* @noEscape */$_order->formatPrice($block->getRowDisplayPriceExclTax());?>
+<?php else : ?>
+<?php echo /* @noEscape */$_order->formatPrice($block->getTotalAmount($_item))?>
+<?php endif;?>
